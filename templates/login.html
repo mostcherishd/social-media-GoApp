@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevScale Social - Login</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ink: #091322;
+            --slate: #1b2a40;
+            --aqua: #11b8b2;
+            --mint: #6be4dc;
+            --sun: #ffd166;
+            --paper: #f5f8fc;
+            --card: rgba(255, 255, 255, 0.9);
+            --error: #d14343;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Manrope', sans-serif;
+            color: var(--ink);
+            background:
+                radial-gradient(1100px 700px at -10% -10%, #74e6dd 0%, transparent 58%),
+                radial-gradient(900px 600px at 110% 120%, #ffd166 0%, transparent 60%),
+                linear-gradient(140deg, #0f1728 0%, #15243a 40%, #0c1f3c 100%);
+            display: grid;
+            place-items: center;
+            padding: 84px 24px 24px;
+            position: relative;
+        }
+
+        .server-box {
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(980px, calc(100% - 24px));
+            color: #f2f8ff;
+            background: linear-gradient(140deg, rgba(9, 19, 34, .72) 0%, rgba(16, 50, 90, .62) 62%, rgba(17, 184, 178, .5) 100%);
+            border: 1px solid rgba(255, 255, 255, .24);
+            border-radius: 16px;
+            box-shadow: 0 14px 34px rgba(4, 11, 19, .38);
+            backdrop-filter: blur(8px);
+            padding: 12px 16px;
+            display: flex;
+            gap: 16px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: popIn .6s ease;
+        }
+
+        .server-box strong {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            letter-spacing: .2px;
+            color: #ffd166;
+            margin-right: 5px;
+            font-weight: 800;
+        }
+
+        .server-item {
+            font-size: 21px;
+            font-weight: 800;
+            color: #ffd166;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, .22);
+        }
+
+        .shell {
+            width: min(980px, 100%);
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 24px 70px rgba(4, 11, 19, 0.45);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+            animation: popIn .7s ease;
+        }
+
+        .promo {
+            background: linear-gradient(165deg, rgba(17, 184, 178, .35) 0%, rgba(9, 19, 34, .45) 70%);
+            padding: 54px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: -.5px;
+        }
+
+        .brand span { color: var(--sun); }
+
+        .headline {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(28px, 4vw, 44px);
+            line-height: 1.1;
+            margin: 22px 0 14px;
+        }
+
+        .copy {
+            font-size: 15px;
+            color: rgba(255,255,255,.85);
+            line-height: 1.65;
+        }
+
+        .form-wrap {
+            background: var(--card);
+            padding: 52px 46px;
+            display: flex;
+            align-items: center;
+        }
+
+        .form {
+            width: 100%;
+        }
+
+        .title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 30px;
+            margin-bottom: 6px;
+        }
+
+        .sub {
+            color: #4d5d76;
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .error {
+            margin-bottom: 18px;
+            background: #ffe8e8;
+            color: var(--error);
+            border: 1px solid #ffb7b7;
+            padding: 12px 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .label {
+            display: block;
+            margin: 14px 0 7px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #33455f;
+            letter-spacing: .2px;
+        }
+
+        .input {
+            width: 100%;
+            border: 1px solid #d8e1ee;
+            background: white;
+            border-radius: 12px;
+            padding: 13px 14px;
+            font-size: 15px;
+            outline: none;
+            transition: .2s border-color, .2s box-shadow;
+        }
+
+        .input:focus {
+            border-color: var(--aqua);
+            box-shadow: 0 0 0 4px rgba(17, 184, 178, .14);
+        }
+
+        .btn {
+            margin-top: 20px;
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(115deg, #0f223e 0%, #19498a 48%, #11b8b2 100%);
+            color: white;
+            font-weight: 800;
+            font-size: 15px;
+            padding: 14px;
+            cursor: pointer;
+            transition: transform .18s ease, box-shadow .18s ease;
+            box-shadow: 0 14px 28px rgba(20, 59, 103, .3);
+        }
+
+        .btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 18px 32px rgba(20, 59, 103, .35);
+        }
+
+        .demo {
+            margin-top: 18px;
+            font-size: 13px;
+            color: #4d5d76;
+            background: #eef4fb;
+            border: 1px dashed #bfd0e6;
+            border-radius: 10px;
+            padding: 10px 12px;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(10px) scale(0.99); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @media (max-width: 900px) {
+            .shell { grid-template-columns: 1fr; }
+            .promo { padding: 34px 30px; }
+            .form-wrap { padding: 34px 28px; }
+            .server-box {
+                position: static;
+                transform: none;
+                width: min(980px, 100%);
+                margin: 0 auto 14px;
+            }
+            body { padding: 18px; }
+        }
+    </style>
+</head>
+<body>
+    <section class="server-box" aria-label="Server information">
+        <div class="server-item"><strong>IP Address:</strong> {{.ServerIP}}</div>
+        <div class="server-item"><strong>Hostname:</strong> {{.Hostname}}</div>
+    </section>
+
+    <main class="shell">
+        <section class="promo">
+            <div>
+                <div class="brand">DevScale<span>Social</span></div>
+                <h1 class="headline">Your people, your profile, your place.</h1>
+                <p class="copy">Sign in to complete your profile: add your email, your location and a profile picture.</p>
+            </div>
+            <p class="copy">Built with Go + HTML. Pictures live in Amazon S3, profiles in Amazon DynamoDB.</p>
+        </section>
+
+        <section class="form-wrap">
+            <form class="form" method="POST" action="/">
+                <h2 class="title">Welcome back</h2>
+                <p class="sub">Log in to continue.</p>
+
+                {{if .Error}}
+                <div class="error">{{.Error}}</div>
+                {{end}}
+
+                <label class="label" for="username">Username</label>
+                <input class="input" id="username" name="username" type="text" autocomplete="username" required>
+
+                <label class="label" for="password">Password</label>
+                <input class="input" id="password" name="password" type="password" autocomplete="current-password" required>
+
+                <button class="btn" type="submit">Log In</button>
+
+                <p class="demo">Demo users: alex / password123 or sam / secure456</p>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

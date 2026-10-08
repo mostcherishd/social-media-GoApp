@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevScale Social - Profile</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep: #081524;
+            --ocean: #123a6f;
+            --teal: #11b8b2;
+            --teal-soft: #d9f7f5;
+            --sun: #ffd166;
+            --bg: #eef3fb;
+            --card: #ffffff;
+            --text: #102238;
+            --muted: #5f7290;
+            --line: #dce5f2;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            color: var(--text);
+            background:
+                radial-gradient(1000px 500px at 80% -20%, #c9efff 0%, transparent 60%),
+                radial-gradient(900px 500px at -10% 120%, #f8edc8 0%, transparent 55%),
+                var(--bg);
+            min-height: 100vh;
+        }
+
+        .nav {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 24px;
+            background: linear-gradient(100deg, #0d1f36 0%, #11345f 65%, #145f8a 100%);
+            color: white;
+            box-shadow: 0 8px 30px rgba(12, 26, 44, .28);
+        }
+
+        .brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 24px;
+            letter-spacing: -.5px;
+            font-weight: 700;
+        }
+
+        .brand span { color: var(--sun); }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .logout {
+            text-decoration: none;
+            color: #eaf6ff;
+            border: 1px solid rgba(255,255,255,.28);
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-weight: 700;
+            transition: .18s ease;
+        }
+
+        .logout:hover { background: rgba(255,255,255,.12); }
+
+        .layout {
+            width: min(980px, 100%);
+            margin: 22px auto 36px;
+            padding: 0 16px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+        }
+
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--line);
+            border-radius: 18px;
+            box-shadow: 0 8px 26px rgba(10, 23, 40, .08);
+        }
+
+        .server-box {
+            padding: 14px 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            color: #eaf7ff;
+            background: linear-gradient(130deg, #0d2139 0%, #104a7c 62%, #11b8b2 100%);
+            border: 1px solid rgba(255, 255, 255, .18);
+        }
+
+        .server-item {
+            font-size: 21px;
+            font-weight: 800;
+            color: #ffd166;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, .2);
+        }
+
+        .server-item strong {
+            color: #ffd166;
+            margin-right: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 18px;
+            letter-spacing: .2px;
+            font-weight: 800;
+        }
+
+        .hero {
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            background: linear-gradient(130deg, #ffffff 0%, #f0fbfa 100%);
+        }
+
+        .welcome {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(24px, 4vw, 34px);
+            line-height: 1.1;
+        }
+
+        .welcome span { color: var(--ocean); }
+
+        .chip {
+            font-size: 12px;
+            font-weight: 700;
+            color: #0f5f66;
+            background: var(--teal-soft);
+            border: 1px solid #bcece8;
+            padding: 8px 12px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .chip.todo {
+            color: #7a5200;
+            background: #fff4d6;
+            border-color: #ffe08a;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 18px;
+            align-items: start;
+        }
+
+        .card {
+            padding: 22px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 160px;
+            height: 160px;
+            margin: 4px auto 16px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 4px solid #fff;
+            box-shadow: 0 0 0 3px var(--teal), 0 12px 26px rgba(10, 23, 40, .18);
+            background: linear-gradient(140deg, #0f223e 0%, #19498a 55%, #11b8b2 100%);
+            display: grid;
+            place-items: center;
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .card-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 22px;
+        }
+
+        .card-handle {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 2px;
+        }
+
+        .facts {
+            list-style: none;
+            margin-top: 18px;
+            text-align: left;
+            display: grid;
+            gap: 10px;
+        }
+
+        .facts li {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        .facts span {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: .6px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 2px;
+        }
+
+        .facts .missing { color: #a0aec0; font-style: italic; }
+
+        .updated {
+            margin-top: 14px;
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .editor { padding: 22px; }
+
+        .editor h2 {
+            font-size: 19px;
+            margin-bottom: 4px;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .editor .sub {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 16px;
+        }
+
+        .alert, .success {
+            margin-bottom: 14px;
+            padding: 10px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .alert {
+            border: 1px solid #ffc7c7;
+            color: #b63838;
+            background: #ffeceb;
+        }
+
+        .success {
+            border: 1px solid #bcece8;
+            color: #0f5f66;
+            background: var(--teal-soft);
+        }
+
+        .label {
+            display: block;
+            margin: 14px 0 7px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #33455f;
+            letter-spacing: .2px;
+        }
+
+        .input {
+            width: 100%;
+            border: 1px solid #c9d8ea;
+            background: white;
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-family: inherit;
+            font-size: 15px;
+            outline: none;
+            transition: .2s border-color, .2s box-shadow;
+        }
+
+        .input:focus {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 4px rgba(17, 184, 178, .14);
+        }
+
+        .drop {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border: 1px dashed #bfd0e6;
+            background: #f6f9fd;
+            border-radius: 12px;
+            padding: 14px;
+            cursor: pointer;
+            transition: .2s border-color, .2s background;
+        }
+
+        .drop:hover { border-color: var(--teal); background: #f0fbfa; }
+
+        .drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+
+        .drop:focus-within {
+            border-color: var(--teal);
+            box-shadow: 0 0 0 4px rgba(17, 184, 178, .14);
+        }
+
+        .preview {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            flex: none;
+            background: #dce5f2;
+            object-fit: cover;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 1px #c9d8ea;
+        }
+
+
+        .drop-text strong { display: block; font-size: 14px; }
+        .drop-text small { color: var(--muted); font-size: 12px; }
+
+        .row {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .btn {
+            border: none;
+            border-radius: 11px;
+            padding: 12px 18px;
+            color: white;
+            font-weight: 800;
+            font-size: 15px;
+            cursor: pointer;
+            background: linear-gradient(110deg, #0f223e 0%, #15467d 55%, #11b8b2 100%);
+            box-shadow: 0 10px 20px rgba(12, 40, 76, .26);
+            transition: transform .15s ease;
+        }
+
+        .btn:hover { transform: translateY(-1px); }
+        .btn[disabled] { opacity: .7; cursor: progress; transform: none; }
+
+        @media (max-width: 760px) {
+            .nav { padding: 12px 14px; }
+            .brand { font-size: 20px; }
+            .hero { flex-direction: column; align-items: flex-start; }
+            .grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="nav">
+        <div class="brand">DevScale<span>Social</span></div>
+        <div class="nav-right">
+            <strong>{{.CurrentUser}}</strong>
+            <a class="logout" href="/logout">Logout</a>
+        </div>
+    </header>
+
+    <main class="layout">
+        <section class="panel server-box" aria-label="Server information">
+            <div class="server-item"><strong>IP Address:</strong> {{.ServerIP}}</div>
+            <div class="server-item"><strong>Hostname:</strong> {{.Hostname}}</div>
+            {{if .IAMRole}}<div class="server-item"><strong>IAM Role:</strong> {{.IAMRole}}</div>{{end}}
+        </section>
+
+        <section class="panel hero">
+            {{if .Complete}}
+            <h1 class="welcome">Looking good, <span>{{.CurrentUser}}</span>.</h1>
+            <div class="chip">Profile complete</div>
+            {{else}}
+            <h1 class="welcome">Hi <span>{{.CurrentUser}}</span>, let's complete your profile.</h1>
+            <div class="chip todo">Profile incomplete</div>
+            {{end}}
+        </section>
+
+        <div class="grid">
+            <aside class="panel card">
+                <div class="avatar">
+                    {{if .PictureURL}}
+                    <img src="{{.PictureURL}}" alt="Profile picture of {{.CurrentUser}}">
+                    {{else}}
+                    <span aria-hidden="true">{{slice .CurrentUser 0 1}}</span>
+                    {{end}}
+                </div>
+                <div class="card-name">{{.CurrentUser}}</div>
+                <div class="card-handle">@{{.Username}}</div>
+
+                <ul class="facts">
+                    <li><span>Email</span>{{if .Email}}{{.Email}}{{else}}<em class="missing">Not set</em>{{end}}</li>
+                    <li><span>Location</span>{{if .Location}}{{.Location}}{{else}}<em class="missing">Not set</em>{{end}}</li>
+                </ul>
+
+                {{if .UpdatedAt}}
+                <p class="updated">Last updated {{.UpdatedAt}} UTC</p>
+                {{end}}
+            </aside>
+
+            <section class="panel editor">
+                <h2>{{if .Complete}}Edit profile{{else}}Complete your profile{{end}}</h2>
+                <p class="sub">Your picture is stored in Amazon S3 and your details in Amazon DynamoDB.</p>
+
+                {{if .Error}}
+                <div class="alert" role="alert">{{.Error}}</div>
+                {{end}}
+                {{if .Success}}
+                <div class="success" role="status">{{.Success}}</div>
+                {{end}}
+
+                <form id="profile-form" method="POST" action="/profile" enctype="multipart/form-data">
+                    <label class="label" for="email">Email</label>
+                    <input class="input" id="email" name="email" type="email" autocomplete="email" maxlength="254" value="{{.Email}}" placeholder="you@example.com" required>
+
+                    <label class="label" for="location">Location</label>
+                    <input class="input" id="location" name="location" type="text" autocomplete="address-level2" maxlength="100" value="{{.Location}}" placeholder="City, Country" required>
+
+                    <span class="label">Profile picture</span>
+                    <label class="drop" for="picture">
+                        <img class="preview" id="preview" alt=""{{if .PictureURL}} src="{{.PictureURL}}"{{end}}>
+                        <span class="drop-text">
+                            <strong id="picture-name">{{if .PictureURL}}Choose a new picture{{else}}Choose a picture{{end}}</strong>
+                            <small>JPEG, PNG, GIF or WebP, up to 5 MB</small>
+                        </span>
+                        <input id="picture" name="picture" type="file" accept="image/jpeg,image/png,image/gif,image/webp"{{if not .PictureURL}} required{{end}}>
+                    </label>
+
+                    <div class="row">
+                        <p class="hint">{{if .PictureURL}}Leave the picture empty to keep your current one.{{else}}All fields are required.{{end}}</p>
+                        <button class="btn" id="save" type="submit">Save Profile</button>
+                    </div>
+                </form>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        (function () {
+            var input = document.getElementById('picture');
+            var preview = document.getElementById('preview');
+            var name = document.getElementById('picture-name');
+            var form = document.getElementById('profile-form');
+            var save = document.getElementById('save');
+
+            input.addEventListener('change', function () {
+                var file = input.files && input.files[0];
+                if (!file) return;
+                name.textContent = file.name;
+                preview.src = URL.createObjectURL(file);
+            });
+
+            form.addEventListener('submit', function () {
+                save.disabled = true;
+                save.textContent = 'Saving…';
+            });
+        })();
+    </script>
+</body>
+</html>
