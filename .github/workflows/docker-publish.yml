@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: devscalecloud/devscale_social_media_app
+  IMAGE_NAME: mostcherishd/social-media-GoApp
 
 jobs:
   docker:
